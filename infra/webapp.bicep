@@ -1,5 +1,4 @@
-param webAppName string = 'monAppName' // Remplacez 'monAppName' par la valeur par défaut de votre choix
-
+param webAppName string = uniqueString(resourceGroup().id) // Generate unique String for web app name
 param sku string = 'S1' // The SKU of App Service Plan
 param location string = resourceGroup().location
 
@@ -16,7 +15,6 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   }
   kind: 'app'
 }
-
 resource appService 'Microsoft.Web/sites@2020-06-01' = {
   name: webAppName
   kind: 'app'
